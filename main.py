@@ -1,10 +1,7 @@
-from PyQt5 import QtGui, QtWidgets, QtCore
-from PyQt5.QtCore import QDir, QSize, QSizeF, Qt, QUrl
-from PyQt5.QtGui import QTransform, QIcon
-from PyQt5.QtWidgets import (QApplication, QFileDialog, QFrame,
-        QLineEdit, QPlainTextEdit, QLabel, 
-        QPushButton, QSlider, QStyle, QVBoxLayout,
-        QWidget, QTableWidget, QTableWidgetItem,
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import (QApplication, QFileDialog, QLabel, 
+        QPushButton, QWidget, QTableWidget, QTableWidgetItem,
         QMessageBox, QCheckBox, QGroupBox)
 import os
 import sys
