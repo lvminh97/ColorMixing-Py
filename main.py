@@ -27,27 +27,27 @@ class App(QWidget):
         self.label1.setText("Các màu cơ bản")
         self.label1.move(20, 20)
 
-        self.basicColor1CheckBox = QCheckBox("Yellow", self)
+        self.basicColor1CheckBox = QCheckBox("Yellow C", self)
         self.basicColor1CheckBox.resize(200, 20)
         self.basicColor1CheckBox.move(20, 50)
 
-        self.basicColor2CheckBox = QCheckBox("Red", self)
+        self.basicColor2CheckBox = QCheckBox("Red 032C", self)
         self.basicColor2CheckBox.resize(200, 20)
         self.basicColor2CheckBox.move(20, 80)
 
-        self.basicColor3CheckBox = QCheckBox("White", self)
+        self.basicColor3CheckBox = QCheckBox("Rhodmine Red C", self)
         self.basicColor3CheckBox.resize(200, 20)
         self.basicColor3CheckBox.move(20, 110)
 
-        self.basicColor4CheckBox = QCheckBox("Magenta", self)
+        self.basicColor4CheckBox = QCheckBox("Pink C", self)
         self.basicColor4CheckBox.resize(200, 20)
         self.basicColor4CheckBox.move(140, 50)
 
-        self.basicColor5CheckBox = QCheckBox("Blue", self)
+        self.basicColor5CheckBox = QCheckBox("Blue C", self)
         self.basicColor5CheckBox.resize(200, 20)
         self.basicColor5CheckBox.move(140, 80)
 
-        self.basicColor6CheckBox = QCheckBox("Black", self)
+        self.basicColor6CheckBox = QCheckBox("Black C", self)
         self.basicColor6CheckBox.resize(200, 20)
         self.basicColor6CheckBox.move(140, 110)
 
@@ -186,7 +186,7 @@ class App(QWidget):
         QMessageBox.about(self, 'Thông báo', 'Đã tính toán xong!')
 
     def printRatio(self):
-        self.ratioText.setText("Yellow: {:.2f} %\n\nRed: {:.2f} %\n\nWhite: {:.2f} %\n\nMagenta: {:.2f} %\n\nBlue: {:.2f} %\n\nBlack: {:.2f} %".format(self.ratio[0] * 100, self.ratio[1] * 100, self.ratio[2] * 100, self.ratio[3] * 100, self.ratio[4] * 100, self.ratio[5] * 100))
+        self.ratioText.setText("Yellow C: {:.2f} %\n\nRed 032C: {:.2f} %\n\nRhodmine Red C: {:.2f} %\n\nPink C: {:.2f} %\n\nBlue C: {:.2f} %\n\nBlack C: {:.2f} %".format(self.ratio[0] * 100, self.ratio[1] * 100, self.ratio[2] * 100, self.ratio[3] * 100, self.ratio[4] * 100, self.ratio[5] * 100))
 
     def setColorBox(self, box, RGB): ## box = 0 -> sampleColor; box = 1 -> computeColor
         styleSheet = 'border: 1px solid #a9a8b3; background-color: #' + '%02x%02x%02x' % (RGB[0], RGB[1], RGB[2])   
