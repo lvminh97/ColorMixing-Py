@@ -109,7 +109,7 @@ class App(QWidget):
 
         self.graphView = PlotCanvas(self, width = 6, height = 3.5)
         self.graphView.move(320, 250)
-        self.graphView.plot(list(range(400, 701, 10)), [1] + [0] * 30, 'w')
+        self.graphView.clear()
 
         self.show()
 
@@ -171,9 +171,7 @@ class App(QWidget):
             self.ratio[5] = ratio[pos]
             pos += 1
         self.printRatio()
-        self.graphView.clear()
-        self.graphView.plot(list(range(400, 701, 10)), self.sampleData, 'b')
-        self.graphView.plot(list(range(400, 701, 10)), sampleRes, 'r')
+        self.graphView.plot(list(range(400, 701, 10)), self.sampleData, sampleRes)
 
         self.setColorBox(0, Helper.sampleToRGB(self.sampleData))
         self.setColorBox(1, Helper.sampleToRGB(sampleRes))
