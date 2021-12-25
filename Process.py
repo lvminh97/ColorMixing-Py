@@ -122,11 +122,11 @@ class Process:
 
 					if Helper.deltaAB(LAB_Act, self.LAB_Ref) < 5 and self.minDiff2 > abs(LAB_Act[0] - self.LAB_Ref[0]):
 						self.minDiff2 = abs(LAB_Act[0] - self.LAB_Ref[0])
-						self.ratioFinal = [i / max for i in self.ratio]
+						self.ratioFinal = [i for i in self.ratio]
 						self.sampleFinal = sampleRes.T.tolist()[0]
 					elif Helper.deltaAB(LAB_Act, self.LAB_Ref) < self.minDiff:
 						self.minDiff = Helper.deltaAB(LAB_Act, self.LAB_Ref)
-						self.ratioFinal = [i / max for i in self.ratio]
+						self.ratioFinal = [i for i in self.ratio]
 						self.sampleFinal = sampleRes.T.tolist()[0]
 			else:
 				return
