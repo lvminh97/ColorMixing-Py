@@ -145,12 +145,14 @@ class App(QWidget):
         self.setSampleData()                
         process = Process()
         Max = 5000
-        tmp  = process.compute(basicColorChosen, self.sampleData, [[0, Max]] * 6, 100, Max)
+        tmp  = process.compute(basicColorChosen, self.sampleData, [[0, Max]] * 6, 400, Max)
         tmp  = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 200, tmp[0][i] + 200] for i in range(len(tmp[0]))], 50, Max)
         tmp  = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 100, tmp[0][i] + 100] for i in range(len(tmp[0]))], 25, Max)
         tmp  = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 50, tmp[0][i] + 50] for i in range(len(tmp[0]))], 10, Max)
         tmp  = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 25, tmp[0][i] + 25] for i in range(len(tmp[0]))], 5, Max)
-        resp = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 10, tmp[0][i] + 10] for i in range(len(tmp[0]))], 1, Max)
+        tmp = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 10, tmp[0][i] + 10] for i in range(len(tmp[0]))], 2, Max)
+        resp = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 5, tmp[0][i] + 5] for i in range(len(tmp[0]))], 1, Max)
+
         sampleRes = resp[1]
         ratio = [i / Max for i in resp[0]]
         pos = 0
