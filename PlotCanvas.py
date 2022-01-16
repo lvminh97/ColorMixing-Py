@@ -14,11 +14,15 @@ class PlotCanvas(FigureCanvas):
 		FigureCanvas.setSizePolicy(self, QSizePolicy.Expanding, QSizePolicy.Expanding)
 		FigureCanvas.updateGeometry(self)
 
-	def plot(self, xData, yData, color = 'b'):
-		axes = self.figure.add_subplot(111)
-		axes.plot(xData, yData, color)
+	def plot(self, xData, yData, yData2):
+		self.figure.clear()
+		axes = self.figure.add_subplot(1, 1, 1, yticks = [0, 0.2, 0.4, 0.6, 0.8, 1.0])
+		axes.plot(xData, yData, 'b')
+		axes.plot(xData, yData2, 'r')
+		axes.plot([400, 400], [0, 1], 'w')
 		self.draw()
 
 	def clear(self):
 		self.figure.clear()
-		self.plot(list(range(400, 701, 10)), [1] + [0] * 30, 'w')
+		axes = self.figure.add_subplot(1, 1, 1, yticks = [0, 0.2, 0.4, 0.6, 0.8, 1.0])
+		axes.plot(list(range(400, 701, 10)), [1] + [0] * 30, 'w')

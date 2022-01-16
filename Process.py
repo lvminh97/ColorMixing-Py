@@ -31,7 +31,7 @@ class Helper:
 			Z = sum([Illuminant.D65_ILL[i] * ObserverFunction.Z10[i] * sample[i] for i in range(31)])
 		return [X / K, Y / K, Z / K]
 
-	def rgbAdj(x):
+	def rgbAdj(x): ####
 		res = 0
 		if x <= -0.0031308:
 			res = 0
@@ -122,11 +122,11 @@ class Process:
 
 					if Helper.deltaAB(LAB_Act, self.LAB_Ref) < 5 and self.minDiff2 > abs(LAB_Act[0] - self.LAB_Ref[0]):
 						self.minDiff2 = abs(LAB_Act[0] - self.LAB_Ref[0])
-						self.ratioFinal = [i / max for i in self.ratio]
+						self.ratioFinal = [i for i in self.ratio]
 						self.sampleFinal = sampleRes.T.tolist()[0]
 					elif Helper.deltaAB(LAB_Act, self.LAB_Ref) < self.minDiff:
-						self.minDiff = Helper.deltaCH(LAB_Act, self.LAB_Ref)
-						self.ratioFinal = [i / max for i in self.ratio]
+						self.minDiff = Helper.deltaAB(LAB_Act, self.LAB_Ref)
+						self.ratioFinal = [i for i in self.ratio]
 						self.sampleFinal = sampleRes.T.tolist()[0]
 			else:
 				return

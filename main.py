@@ -1,10 +1,7 @@
-from PyQt5 import QtGui, QtWidgets, QtCore
-from PyQt5.QtCore import QDir, QSize, QSizeF, Qt, QUrl
-from PyQt5.QtGui import QTransform, QIcon
-from PyQt5.QtWidgets import (QApplication, QFileDialog, QFrame,
-        QLineEdit, QPlainTextEdit, QLabel, 
-        QPushButton, QSlider, QStyle, QVBoxLayout,
-        QWidget, QTableWidget, QTableWidgetItem,
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import (QApplication, QFileDialog, QLabel, 
+        QPushButton, QWidget, QTableWidget, QTableWidgetItem,
         QMessageBox, QCheckBox, QGroupBox)
 import os
 import sys
@@ -30,27 +27,27 @@ class App(QWidget):
         self.label1.setText("Các màu cơ bản")
         self.label1.move(20, 20)
 
-        self.basicColor1CheckBox = QCheckBox("Yellow", self)
+        self.basicColor1CheckBox = QCheckBox("Yellow C", self)
         self.basicColor1CheckBox.resize(200, 20)
         self.basicColor1CheckBox.move(20, 50)
 
-        self.basicColor2CheckBox = QCheckBox("Red", self)
+        self.basicColor2CheckBox = QCheckBox("Red 032C", self)
         self.basicColor2CheckBox.resize(200, 20)
         self.basicColor2CheckBox.move(20, 80)
 
-        self.basicColor3CheckBox = QCheckBox("White", self)
+        self.basicColor3CheckBox = QCheckBox("Rhodmine Red C", self)
         self.basicColor3CheckBox.resize(200, 20)
         self.basicColor3CheckBox.move(20, 110)
 
-        self.basicColor4CheckBox = QCheckBox("Magenta", self)
+        self.basicColor4CheckBox = QCheckBox("Pink C", self)
         self.basicColor4CheckBox.resize(200, 20)
         self.basicColor4CheckBox.move(140, 50)
 
-        self.basicColor5CheckBox = QCheckBox("Blue", self)
+        self.basicColor5CheckBox = QCheckBox("Blue C", self)
         self.basicColor5CheckBox.resize(200, 20)
         self.basicColor5CheckBox.move(140, 80)
 
-        self.basicColor6CheckBox = QCheckBox("Black", self)
+        self.basicColor6CheckBox = QCheckBox("Black C", self)
         self.basicColor6CheckBox.resize(200, 20)
         self.basicColor6CheckBox.move(140, 110)
 
@@ -112,7 +109,7 @@ class App(QWidget):
 
         self.graphView = PlotCanvas(self, width = 6, height = 3.5)
         self.graphView.move(320, 250)
-        self.graphView.plot(list(range(400, 701, 10)), [1] + [0] * 30, 'w')
+        self.graphView.clear()
 
         self.show()
 
@@ -148,11 +145,16 @@ class App(QWidget):
         self.setSampleData()                
         process = Process()
         Max = 5000
-        resp  = process.compute(basicColorChosen, self.sampleData, [[0, Max]] * 6, 1, Max)
-        # tmp  = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 15, tmp[0][i] + 15] for i in range(len(tmp[0]))], 5)
-        # resp = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 8, tmp[0][i] + 8] for i in range(len(tmp[0]))], 1)
+        tmp  = process.compute(basicColorChosen, self.sampleData, [[0, Max]] * 6, 400, Max)
+        tmp  = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 200, tmp[0][i] + 200] for i in range(len(tmp[0]))], 50, Max)
+        tmp  = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 100, tmp[0][i] + 100] for i in range(len(tmp[0]))], 25, Max)
+        tmp  = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 50, tmp[0][i] + 50] for i in range(len(tmp[0]))], 10, Max)
+        tmp  = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 25, tmp[0][i] + 25] for i in range(len(tmp[0]))], 5, Max)
+        tmp = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 10, tmp[0][i] + 10] for i in range(len(tmp[0]))], 2, Max)
+        resp = process.compute(basicColorChosen, self.sampleData, [[tmp[0][i] - 5, tmp[0][i] + 5] for i in range(len(tmp[0]))], 1, Max)
+
         sampleRes = resp[1]
-        ratio = resp[0]
+        ratio = [i / Max for i in resp[0]]
         pos = 0
         self.ratio = [0, 0, 0, 0, 0, 0]
         if self.basicColor1CheckBox.isChecked():
@@ -174,9 +176,7 @@ class App(QWidget):
             self.ratio[5] = ratio[pos]
             pos += 1
         self.printRatio()
-        self.graphView.clear()
-        self.graphView.plot(list(range(400, 701, 10)), self.sampleData, 'b')
-        self.graphView.plot(list(range(400, 701, 10)), sampleRes, 'r')
+        self.graphView.plot(list(range(400, 701, 10)), self.sampleData, sampleRes)
 
         self.setColorBox(0, Helper.sampleToRGB(self.sampleData))
         self.setColorBox(1, Helper.sampleToRGB(sampleRes))
@@ -189,7 +189,7 @@ class App(QWidget):
         QMessageBox.about(self, 'Thông báo', 'Đã tính toán xong!')
 
     def printRatio(self):
-        self.ratioText.setText("Yellow: {:.2f} %\n\nRed: {:.2f} %\n\nWhite: {:.2f} %\n\nMagenta: {:.2f} %\n\nBlue: {:.2f} %\n\nBlack: {:.2f} %".format(self.ratio[0] * 100, self.ratio[1] * 100, self.ratio[2] * 100, self.ratio[3] * 100, self.ratio[4] * 100, self.ratio[5] * 100))
+        self.ratioText.setText("Yellow C: {:.2f} %\n\nRed 032C: {:.2f} %\n\nRhodmine Red C: {:.2f} %\n\nPink C: {:.2f} %\n\nBlue C: {:.2f} %\n\nBlack C: {:.2f} %".format(self.ratio[0] * 100, self.ratio[1] * 100, self.ratio[2] * 100, self.ratio[3] * 100, self.ratio[4] * 100, self.ratio[5] * 100))
 
     def setColorBox(self, box, RGB): ## box = 0 -> sampleColor; box = 1 -> computeColor
         styleSheet = 'border: 1px solid #a9a8b3; background-color: #' + '%02x%02x%02x' % (RGB[0], RGB[1], RGB[2])   
